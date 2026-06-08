@@ -1,11 +1,16 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { tanstackStartVite } from "@tanstack/start-plugin/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  tanstackStart: {
-    // توجيه السيرفر
-    server: { 
-      entry: "server",
-      preset: "vercel" // السطر ده السحري اللي هيخلي التاركت يروح لـ Vercel بديل لـ cloudflare
-    },
-  },
+  plugins: [
+    tsconfigPaths(),
+    tanstackStartVite({
+      server: {
+        preset: "vercel"
+      }
+    }),
+    react(),
+  ],
 });

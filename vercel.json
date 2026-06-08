@@ -1,16 +1,27 @@
 {
   "version": 2,
-  "framework": "tanstack-start",
   "builds": [
     {
-      "src": "package.json",
+      "src": ".vinxi/build/server/index.mjs",
       "use": "@vercel/node"
+    },
+    {
+      "src": ".vinxi/build/public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "src": "/_vercel/insights(.*)",
+      "dest": "/_vercel/insights$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/.vinxi/build/public/assets/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": ".vinxi/build/server/index.mjs"
     }
   ]
 }
