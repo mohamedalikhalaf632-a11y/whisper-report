@@ -1,16 +1,8 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { tanstackStartVite } from "@tanstack/start-plugin/vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  plugins: [
-    tsconfigPaths(),
-    tanstackStartVite({
-      server: {
-        preset: "vercel"
-      }
-    }),
-    react(),
-  ],
+  tanstackStart: {
+    // توجيه السيرفر للـ SSR wrapper الخاص بـ Cloudflare
+    server: { entry: "server" },
+  },
 });
